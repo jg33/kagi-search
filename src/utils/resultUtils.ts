@@ -2,11 +2,17 @@ import { Icon } from "@raycast/api";
 import { SearchResult } from "./types";
 
 export const getIcon = (item: SearchResult) => {
-  if (item.isHistory) {
-    return Icon.Clock;
-  } else if (item.isNavigation) {
+  if (item.isNavigation) {
     return Icon.Link;
-  } else {
+  } else if (item.isApiResult) {
+    return Icon.Globe;
+
+  } else if (item.isFastGPT){
+    return Icon.QuestionMark;
+  } else if (item.hasBang){
+    return Icon.Exclamationmark;
+  }
+  else {
     return Icon.MagnifyingGlass;
   }
 };

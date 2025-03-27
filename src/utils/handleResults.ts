@@ -1,3 +1,4 @@
+// src/utils/handleResults.ts
 import { getLocalStorageItem, randomId } from "@raycast/api";
 import { SearchResult } from "./types";
 import fetch from "node-fetch";
@@ -35,23 +36,41 @@ export async function getSearchResults(
   const text = decoder.decode(buffer);
   const json = JSON.parse(text);
 
-  const results: SearchResult[] = [
-    {
-      id: randomId(),
-      query: searchText,
-      description: searchText,
-      url: `https://kagi.com/search?token=${token}&q=${encodeURIComponent(searchText)}`,
-    },
-  ];
+  const firstResult = {
+    id: randomId(),
+    query: searchText,
+    description: `Search Kagi for '${searchText}'`,
+    url: `https://kagi.com/search?token=${token}&q=${encodeURIComponent(searchText)}`,
+  };
+
+  // Apply description changes based on conditions
+  if (searchText.includes("!")) {
+    firstResult.description = "Use a Kagi bang with: " + searchText;
+  } else if (searchText.includes("?")) {
+    firstResult.description = "Ask FastGPT: " + searchText;
+  }
+
+  const results: SearchResult[] = [firstResult];
 
   json[1].map((item: string, i: number) => {
-    results[i + 1] = {
+    const result = {
       id: randomId(),
       query: item,
-      description: item,
+      description: `Search Kagi for '${item}'`,
       url: `https://kagi.com/search?token=${token}&q=${encodeURIComponent(item)}`,
     };
+
+    // Apply the same conditional logic to the other results
+    if (result.query.includes("!")) {
+      result.description = "Use a Kagi bang with: " + item;
+    } else if (result.query.includes("?")) {
+      result.description = "Ask FastGPT: " + item;
+    }
+
+    results[i + 1] = result;
   });
 
   return results;
 }
+
+
