@@ -1,5 +1,5 @@
 // src/fastgpt-view.tsx
-import { ActionPanel, Detail, List, Icon, getPreferenceValues } from "@raycast/api";
+import { ActionPanel, Detail, Icon, getPreferenceValues } from "@raycast/api";
 import { useState, useEffect } from "react";
 import { searchWithFastGPT } from "./utils/kagiApi";
 import open from "open";

@@ -5,14 +5,12 @@ import {
   getPreferenceValues,
   Icon,
   List,
-  showToast,
-  Detail
 } from "@raycast/api";
 import { getIcon } from "./utils/resultUtils";
 import { useSearch } from "./utils/useSearch";
 import open from "open";
 import { SearchResult } from "./utils/types";
-import React, { useState , ReactNode} from "react";
+import React, { useState } from "react";
 import FastGPTView from "./fastgpt-view";
 
 interface ExtensionPreferences {
@@ -30,17 +28,11 @@ export default function Command() {
     search,
     searchWithApi,
     addHistory,
-    deleteAllHistory,
-    deleteHistoryItem,
-    fastGPTResult,
     isFastGPTLoading,
     queryFastGPT} = useSearch(token, apiKey);
 
   const listItems: SearchResult[] = searchText.length === 0 ? history : results;
   const [selectedItemId, setSelectedItemId] = useState<string | undefined>(undefined);
-
-  // Check if search text ends with a question mark
-  const isQuestionQuery = searchText.trim().endsWith('?');
 
   const [showFastGPTView, setShowFastGPTView] = useState(false);
   const [fastGPTQuery, setFastGPTQuery] = useState("");
