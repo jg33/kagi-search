@@ -9,7 +9,7 @@ export interface SearchResult {
   isHistory?: boolean;
   isApiResult?: boolean;
   isFastGPT?: boolean;
-  content?: string;      // For storing response content
+  content?: string; // For storing response content
   references?: {
     title: string;
     snippet: string;

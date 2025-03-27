@@ -6,13 +6,11 @@ export const getIcon = (item: SearchResult) => {
     return Icon.Link;
   } else if (item.isApiResult) {
     return Icon.Globe;
-
-  } else if (item.isFastGPT){
+  } else if (item.isFastGPT) {
     return Icon.QuestionMark;
-  } else if (item.hasBang){
+  } else if (item.hasBang) {
     return Icon.Exclamationmark;
-  }
-  else {
+  } else {
     return Icon.MagnifyingGlass;
   }
 };

@@ -17,7 +17,7 @@ export default function FastGPTView(props: FastGPTViewProps) {
   const { token, apiKey }: ExtensionPreferences = getPreferenceValues();
   const [isLoading, setIsLoading] = useState(true);
   const [answer, setAnswer] = useState("");
-  const [references, setReferences] = useState<{title: string, snippet: string, url: string}[]>([]);
+  const [references, setReferences] = useState<{ title: string; snippet: string; url: string }[]>([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -67,7 +67,7 @@ ${references.map((ref, index) => `${index + 1}. [${ref.title}](${ref.url})\n   $
           ))}
         </Detail.Metadata>
       }
-      actions={(
+      actions={
         <ActionPanel>
           <ActionPanel.Item
             title="Search on Kagi"
@@ -83,7 +83,7 @@ ${references.map((ref, index) => `${index + 1}. [${ref.title}](${ref.url})\n   $
             />
           ))}
         </ActionPanel>
-      )}
+      }
     />
   );
 }

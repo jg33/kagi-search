@@ -170,6 +170,6 @@ export function useSearch(token: string, apiKey: string) {
     deleteHistoryItem,
     fastGPTResult,
     isFastGPTLoading,
-    queryFastGPT
+    queryFastGPT,
   };
 }

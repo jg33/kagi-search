@@ -18,7 +18,7 @@ export async function getSearchHistory(): Promise<SearchResult[]> {
 export async function getSearchResults(
   searchText: string,
   token: string,
-  signal: AbortSignal
+  signal: AbortSignal,
 ): Promise<SearchResult[]> {
   const response = await fetch(`https://kagi.com/api/autosuggest?q=${encodeURIComponent(searchText)}`, {
     method: "get",
@@ -73,5 +73,3 @@ export async function getSearchResults(
 
   return results;
 }
-
-

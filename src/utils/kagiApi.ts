@@ -25,16 +25,12 @@ interface KagiSearchResponse {
   }>;
 }
 
-export async function searchWithKagiAPI(
-  query: string,
-  apiKey: string,
-  signal: AbortSignal
-): Promise<SearchResult[]> {
+export async function searchWithKagiAPI(query: string, apiKey: string, signal: AbortSignal): Promise<SearchResult[]> {
   const response = await fetch(`https://kagi.com/api/v0/search?q=${encodeURIComponent(query)}`, {
     method: "GET",
     signal: signal,
     headers: {
-      "Authorization": `Bot ${apiKey}`,
+      Authorization: `Bot ${apiKey}`,
       "Content-Type": "application/json",
     },
   });
@@ -43,7 +39,7 @@ export async function searchWithKagiAPI(
     return Promise.reject(response.statusText);
   }
 
-  const data = await response.json() as KagiSearchResponse;
+  const data = (await response.json()) as KagiSearchResponse;
   const results: SearchResult[] = [];
 
   // Process search results (t=0)
@@ -77,7 +73,7 @@ interface FastGPTResponse {
 export async function searchWithFastGPT(
   query: string,
   apiKey: string,
-  signal: AbortSignal
+  signal: AbortSignal,
 ): Promise<SearchResult | undefined> {
   try {
     const response = await fetch("https://kagi.com/api/v0/fastgpt", {
@@ -85,7 +81,7 @@ export async function searchWithFastGPT(
       signal: signal,
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bot ${apiKey}`,
+        Authorization: `Bot ${apiKey}`,
       },
       body: JSON.stringify({
         query: query,
@@ -97,7 +93,7 @@ export async function searchWithFastGPT(
       return Promise.reject(response.statusText);
     }
 
-    const data = await response.json() as FastGPTResponse;
+    const data = (await response.json()) as FastGPTResponse;
 
     // Create a result for the FastGPT answer
     return {
@@ -106,7 +102,7 @@ export async function searchWithFastGPT(
       description: "FastGPT Answer",
       url: `https://kagi.com/search?q=${encodeURIComponent(query)}`,
       content: data.data.output,
-      references: data.data.references
+      references: data.data.references,
     };
   } catch (error) {
     console.error("FastGPT error:", error);
