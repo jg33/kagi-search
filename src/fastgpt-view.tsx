@@ -38,7 +38,6 @@ export default function FastGPTView(props: FastGPTViewProps) {
         setIsLoading(false);
       }
     }
-
     fetchFastGPTAnswer();
   }, [props.query, apiKey]);
 
@@ -61,14 +60,14 @@ ${references.map((ref, index) => `${index + 1}. [${ref.title}](${ref.url})\n   $
           {references.map((ref, index) => (
             <Detail.Metadata.Link
               key={`link-${index}`}
-              title={ref.url.split("/")[2]}
+              title={ref.url.split("/")[2] || "Link"}
               text={ref.title}
               target={ref.url}
             />
           ))}
         </Detail.Metadata>
       }
-      actions={
+      actions={(
         <ActionPanel>
           <ActionPanel.Item
             title="Search on Kagi"
@@ -84,7 +83,7 @@ ${references.map((ref, index) => `${index + 1}. [${ref.title}](${ref.url})\n   $
             />
           ))}
         </ActionPanel>
-      }
+      )}
     />
   );
 }

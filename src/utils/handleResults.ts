@@ -2,6 +2,7 @@
 import { getLocalStorageItem, randomId } from "@raycast/api";
 import { SearchResult } from "./types";
 import fetch from "node-fetch";
+import { TextDecoder } from "node:util";
 
 export async function getSearchHistory(): Promise<SearchResult[]> {
   const historyString = (await getLocalStorageItem("history")) as string;
