@@ -5,6 +5,7 @@
   "description": "Searches the Closed Beta of Kagi Search, using the autosuggestions url.",
   "icon": "command-icon.png",
   "author": "fearoffish",
+  "contributors": ["goto10"],
   "license": "MIT",
   "commands": [
     {
@@ -47,6 +48,7 @@
   "scripts": {
     "build": "ray build -e dist",
     "dev": "ray develop",
-    "lint": "ray lint"
+    "lint": "ray lint",
+    "publish": "npx @raycast/api@latest publish"
   }
 }
